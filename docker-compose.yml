@@ -1,0 +1,18 @@
+services:
+  # Menambahkan service postgre
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: my_nest_app_container
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: my_app_db
+    ports:
+      # format: "Port di komputer pribadi: Port di Container Docker"
+      - "5432:5432"
+    volumes:
+      - postgres_data_volume:/var/lib/postgresql/data
+
+volumes:
+  postgres_data_volume:
