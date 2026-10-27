@@ -15,7 +15,7 @@ export class BooksController {
     @Get(":id")
     getBookById(@Param('id') id: string){
         // logic untuk mengambil buku berdasarkan id
-        return this.bookService.findOne(Number(id));
+        return this.bookService.findOne(String(id));
     }
 
     // Menyimpan data buku
@@ -29,13 +29,13 @@ export class BooksController {
     @Put(":id")
     updateBook(@Param('id') id: string, @Body() book: CreateBookDto){
         // logic untuk mengupdate buku berdasarkan id
-        return this.bookService.update(Number(id), book);
+        return this.bookService.update(String(id), book);
     }
 
     // Menghapus data buku berdasarkan id
     @Delete(":id")
     deleteBook(@Param('id') id: string){
         // logic untuk menghapus buku berdasarkan id
-        return this.bookService.delete(Number(id));
+        return this.bookService.delete(String(id));
     }
 }
