@@ -1,6 +1,7 @@
-export class Auth{
+export class AuthAccount{
     id: number;
-    username: string;
     email: string;
     password: string;
 }
+
+export type PublicAuthAccount = Omit<AuthAccount, 'password'>;

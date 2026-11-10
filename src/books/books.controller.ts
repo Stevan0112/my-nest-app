@@ -1,6 +1,7 @@
-import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { BooksService } from "./books.service.js";
 import { CreateBookDto } from "./dto/create-book-dto.js";
+import { UpdateBookDto } from './dto/update-book-dto.js';
 
 @Controller('books')
 export class BooksController {
@@ -13,7 +14,7 @@ export class BooksController {
 
     // Mengambil data buku berdasarkan id
     @Get(":id")
-    getBookById(@Param('id') id: string){
+    getBookById(@Param('id', ParseUUIDPipe) id: string){
         // logic untuk mengambil buku berdasarkan id
         return this.bookService.findOne(String(id));
     }
@@ -27,9 +28,9 @@ export class BooksController {
 
     // Mengupdate data buku berdasarkan id
     @Put(":id")
-    updateBook(@Param('id') id: string, @Body() book: CreateBookDto){
+    updateBook(@Param('id', ParseUUIDPipe) id: string, @Body() Book: UpdateBookDto){
         // logic untuk mengupdate buku berdasarkan id
-        return this.bookService.update(String(id), book);
+        return this.bookService.update(String(id), Book as CreateBookDto);
     }
 
     // Menghapus data buku berdasarkan id
