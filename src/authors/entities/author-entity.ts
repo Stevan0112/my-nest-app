@@ -1,0 +1,19 @@
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+
+@Entity('authors')
+export class Author {
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+
+    @Column({type: 'varchar', length: 150})
+    name: string;
+
+    @OneToMany('BookAuthor', 'author')
+    bookAuthors: any[];
+
+    @CreateDateColumn({name:'created_at'})
+    createdAt: Date;
+
+    @UpdateDateColumn({name:'updated_at'})
+    updatedAt: Date;
+}
